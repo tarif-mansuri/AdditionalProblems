@@ -99,7 +99,7 @@ public class LetterPhone {
 	
 	public static void main(String[] args) {
 		LetterPhone letterPhone = new LetterPhone();
-		ArrayList<String> ans = letterPhone.letterCombinations("23");
+		ArrayList<String> ans = letterPhone.letterCombinations("237");
 		for(int i=0; i<ans.size(); i++) {
 			System.out.print(ans.get(i)+" ");
 		}
