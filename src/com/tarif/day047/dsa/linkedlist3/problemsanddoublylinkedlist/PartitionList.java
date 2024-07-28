@@ -5,57 +5,55 @@ import com.tarif.day046.dsa.linkedlist2.sortinganddetectingloop.SwapNodesInPair;
 
 public class PartitionList {
 	public ListNode partition(ListNode A, int B) {
-		ListNode greaterOrEqualHead = null;
-		ListNode greaterOrEqualTail = null;
-		ListNode lesserHeah = null;
-		ListNode lesserTail = null;
-		
+		ListNode h1 = null;
+		ListNode t1 = null;
+		ListNode h2 = null;
+		ListNode t2 = null;
 		while(A!=null) {
 			if(A.val<B) {
-				if(lesserHeah==null) {
-					lesserHeah = A;
-					lesserTail = A;
+				if(t1 == null) {
+					h1 = A;
+					t1 = h1;
 				}else {
-					lesserTail.next = A;
+					t1.next = A;
+					t1 = t1.next;
+					
 				}
+				A = A.next;
+				t1.next = null;
 			}else {
-				if(greaterOrEqualHead==null) {
-					greaterOrEqualHead = A;
-					greaterOrEqualTail = A;
+				if(t2 == null) {
+					h2 = A;
+					t2 = h2;
 				}else {
-					greaterOrEqualTail.next = A;
+					t2.next = A;
+					t2 = t2.next;
+					
 				}
+				A = A.next;
+				t2.next = null;
 			}
-			A = A.next;
 		}
-		
-		//Printing for debugging
-		ListNode temp = lesserHeah;
-		while(temp!=null) {
-			System.out.print(temp.val+" ");
-			temp = temp.next;
+		if(t1!=null) {
+			t1.next = h2;
+			return h1;
+		}else {
+			return h2;
 		}
-		System.out.println();
-		temp = greaterOrEqualHead;
-		while(temp!=null) {
-			System.out.print(temp.val+" ");
-			temp = temp.next;
-		}
-		return null;
     }
 	public static void main(String[] args) {
 		PartitionList partition = new PartitionList();
 		ListNode head = new ListNode(1);
 		head.next = new ListNode(2);
 		head.next.next = new ListNode(3);
-		head.next.next.next = new ListNode(4);
-		head.next.next.next.next = new ListNode(5);
-		head.next.next.next.next.next = new ListNode(6);
-//		head.next.next.next.next.next.next = new ListNode(7);
+		head.next.next.next = new ListNode(1);
+		head.next.next.next.next = new ListNode(3);
+		//head.next.next.next.next.next = new ListNode(2);
+		//head.next.next.next.next.next.next = new ListNode(3);
 //		head.next.next.next.next.next.next.next = new ListNode(8);
 //		head.next.next.next.next.next.next.next.next = new ListNode(9);
 		//head.next.next.next.next.next.next.next.next.next = new ListNode(10);
-		head = partition.partition(head, 4);
+		head = partition.partition(head, 2);
 		while(head!=null) {
 			System.out.print(head.val+" ");
 			head = head.next;
